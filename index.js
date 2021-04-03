@@ -40,17 +40,26 @@ async function listen() {
                 case "UPDATE":
                     console.log(`Update ${payload.new.name}`);
                     break;
-            
-                default:
-                    break;
             }
         })
         .subscribe()
         
 }
 
+async function deleteData(name) {
+    const { data, error } = await supabase
+        .from('Todo')
+        .delete()
+        .eq("name",name)
+}
+
 
 listen()
-update("Belajar")
-add("Testing")
-read()
+
+
+setTimeout(() => {
+    update("Belajar")
+    add("Testing")
+    deleteData("Belajar")
+    read()
+}, 1000);
